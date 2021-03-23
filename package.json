@@ -1,0 +1,12 @@
+{
+  "name": "node_server",
+  "version": "1.0.0",
+  "description": "server on nodeJs",
+  "main": "server.js",
+  "scripts": {
+    "test": "start",
+    "start": "node server.js"
+  },
+  "author": "rinatovic",
+  "license": "ISC"
+}
