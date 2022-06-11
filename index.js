@@ -1,39 +1,40 @@
 import express from 'express'
-import path from 'path'
-import {requestTime, logger} from "./middlewares.js";
-import router from "./routes/servers.js";
+import bodyParser from "body-parser";
+import router from "./settings/routes.js";
+import {requestTime} from "./middleware/middlewares.js";
+import path from "path";
+import cors from 'cors';
 
 
+const HOST = '127.0.0.1';
 const __dirname = path.resolve();
-const PORT = process.env.PORT ?? 3000;
-const app = express();
-
-app.set('view engine', 'ejs');
-app.set('views', path.resolve(__dirname, 'templates'));
-
-app.use(express.static(path.resolve(__dirname, 'static')));
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-
-app.use(requestTime);
-app.use(router);
+const APP = express();
+const PORT = process.env.PORT || 3000;
+const corsOptions ={
+    origin:'http://localhost:3000',
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
 
 
-app.get('/', (req,res)=>{
-    res.render('index', {title: 'Main page', active: 'main'});
-})
-app.get('/login', (req,res)=>{
-    res.render('login', {title: 'Login',active: 'login'});
-})
-
-// app.get('/',(req,res)=>{
-//    res.sendFile(path.resolve(__dirname, 'templates', 'index.html'));
-// });
-//
-app.get('/registration',(req,res)=>{
-    res.render('registration',{title: 'Registration',active: 'registration'});
-})
-
-app.listen(PORT, ()=>{
-    console.log("server has been started");
+APP.use(function (request, response, next) {
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
+APP.use(cors()) // Use this after the variable declaration
+APP.use(requestTime);
+APP.use(bodyParser.urlencoded({extended: true}));
+APP.use(bodyParser.json());
+APP.use(express.static(path.resolve(__dirname, 'static')));
+
+APP.set('view_engine', 'ejs');
+APP.set('views', path.resolve(__dirname,'templates'));
+
+router(APP);
+
+APP.listen(PORT, HOST,()=>{
+    console.log(`App listen on port ${PORT}`);
+})
+
+export default  APP;

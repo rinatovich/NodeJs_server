@@ -1,12 +1,24 @@
 {
-  "name": "node_server",
+  "name": "task_4",
   "version": "1.0.0",
-  "description": "server on nodeJs",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "start",
-    "start": "node server.js"
+    "start": "node index.js",
+    "server": "nodemon index.js"
   },
-  "author": "rinatovic",
-  "license": "ISC"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
 }

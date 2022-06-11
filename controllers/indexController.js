@@ -1,5 +1,25 @@
-import {response} from '../response.js'
-const index = (req,res)=>{
-    response("Hello REST API", res);
+import response from "../response.js";
+import path from 'path'
+
+
+
+const home = (req,res)=>{
+    res.render('index.ejs', {title: 'Home', active: 'main'});
 }
-export default  index;
+
+const login = (req,res)=>{
+    res.render('login.ejs',{title: 'Log in',active: 'login'});
+
+}
+const register = (req,res)=>{
+    console.log(`${req.requestDate.year}.${req.requestDate.month}.${req.requestDate.day} ${req.requestDate.time}`);
+    res.render('register.ejs',{title: 'Register',active: 'register'});
+}
+
+const indexController = {
+    home: home,
+    login: login,
+    register: register
+}
+
+export default indexController;
