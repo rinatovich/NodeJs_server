@@ -4,17 +4,15 @@ import router from "./settings/routes.js";
 import {requestTime} from "./middleware/middlewares.js";
 import path from "path";
 import cors from 'cors';
+import passport from 'passport';
+import passportMid from './middleware/passportMid.js';
+import passportFunction from './middleware/middlewares.js'
 
 
 const HOST = '127.0.0.1';
 const __dirname = path.resolve();
 const APP = express();
 const PORT = process.env.PORT || 3000;
-const corsOptions ={
-    origin:'http://localhost:3000',
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-}
 
 
 APP.use(function (request, response, next) {
@@ -27,6 +25,11 @@ APP.use(requestTime);
 APP.use(bodyParser.urlencoded({extended: true}));
 APP.use(bodyParser.json());
 APP.use(express.static(path.resolve(__dirname, 'static')));
+APP.use(passport.initialize());
+APP.use(passportMid);
+
+
+passportFunction(passport);
 
 APP.set('view_engine', 'ejs');
 APP.set('views', path.resolve(__dirname,'templates'));
