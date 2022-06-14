@@ -2,6 +2,7 @@ import response from "../response.js";
 import connection from "../settings/database.js";
 import jwt from 'jsonwebtoken';
 import config from './../config.js'
+import tokens from "./session.js";
 
 
 const getAllUsers = (req,res) =>{
@@ -47,6 +48,7 @@ const signup = (req,res)=>{
     })
 }
 const signin = (req,res)=>{
+    console.log(req.body);
     connection.query("SELECT `username`, `password` FROM `user` WHERE `username`= '"+ req.body.username +"' AND `password`= '"+ req.body.password +"'", (error, rows, fields)=>{
         if(error){
             response(400, error, res);
@@ -60,6 +62,8 @@ const signin = (req,res)=>{
                     username: rw.username,
                     password: rw.password
                 }, config.jwt, { expiresIn: 120 *120});
+                tokens.push({username: rw.username ,token:token});
+                console.log(tokens);
                 response(200, {token: `Bearer ${token}`},res);
                 return true;
             })

@@ -11,7 +11,7 @@ const options = {
     secretOrKey: config.jwt
 }
 
-export default function(passport){
+export const passportFunction = (passport)=>{
     passport.use(
         new JwtStrategy(options, (payload, done)=>{
             try {

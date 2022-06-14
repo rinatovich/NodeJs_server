@@ -5,9 +5,7 @@ import {requestTime} from "./middleware/middlewares.js";
 import path from "path";
 import cors from 'cors';
 import passport from 'passport';
-import passportMid from './middleware/passportMid.js';
-import passportFunction from './middleware/middlewares.js'
-
+import {passportFunction} from "./middleware/passportMid.js";
 
 const HOST = '127.0.0.1';
 const __dirname = path.resolve();
@@ -26,7 +24,6 @@ APP.use(bodyParser.urlencoded({extended: true}));
 APP.use(bodyParser.json());
 APP.use(express.static(path.resolve(__dirname, 'static')));
 APP.use(passport.initialize());
-APP.use(passportMid);
 
 
 passportFunction(passport);
