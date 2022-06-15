@@ -7,10 +7,10 @@ import cors from 'cors';
 import passport from 'passport';
 import {passportFunction} from "./middleware/passportMid.js";
 
+const PORT = process.env.PORT || 8000;
 const HOST = '127.0.0.1';
 const __dirname = path.resolve();
 const APP = express();
-const PORT = process.env.PORT || 3000;
 
 
 APP.use(function (request, response, next) {
