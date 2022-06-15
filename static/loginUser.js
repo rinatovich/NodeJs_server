@@ -11,10 +11,19 @@ async function sendD(data) {
     let response = await fetchResp.text();
     response = JSON.parse(response);
     if(response.status == 200){
+        sessionStorage.setItem('access_token', response.values.token);
+        sessionStorage.setItem('username', data.username);
+        sessionStorage.setItem('password',  data.password);
         window.location.href = "/";
     }
     else{
-        window.location.href = "/register"
+        if(response.status==403){
+            alert(response.values.message);
+        }
+        else{
+            alert(response.values.message);
+            window.location.href = "/register"
+        }
     }
 }
 

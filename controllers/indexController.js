@@ -1,6 +1,3 @@
-import tokens from './session.js';
-import response from "../response.js";
-
 
 const home = (req,res)=>{
     res.render('index.ejs', {title: 'Home', active: 'main'});
@@ -11,7 +8,6 @@ const login = (req,res)=>{
 
 }
 const register = (req,res)=>{
-    console.log(`${req.requestDate.year}.${req.requestDate.month}.${req.requestDate.day} ${req.requestDate.time}`);
     res.render('register.ejs',{title: 'Register',active: 'register'});
 }
 

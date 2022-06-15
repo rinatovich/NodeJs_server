@@ -1,35 +1,56 @@
     <%- include('./partials/navbar.ejs'); %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .icons{
+            display: flex;
+            justify-content: space-between;
+            max-width: 300px;
+        }
+        .icons i{
+            cursor: pointer;
+            font-size: 30px;
+            transition: color 0.3s linear;
+        }
+        .icons i:hover{
+            color: red;
+        }
+        #allChecked{
+            cursor: pointer;
+        }
+        .blocked{
+            color: red;
+        }
+        .active{
+            color: dodgerblue;
+        }
+    </style>
     <div class="container">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-            </tr>
-            </tbody>
-        </table>
+        <form name="action">
+            <div class="icons">
+                <span><i id="block" class="fa-solid fa-ban"></i></span>
+                <span><i id="unblock" class="fa-solid fa-unlock"></i></span>
+                <span><i id="remove" class="fa-solid fa-trash"></i></span>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th id="allChecked">
+                        Выделить все
+                    </th>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">E-mail</th>
+                    <th scope="col">Last login</th>
+                    <th scope="col">Registration time</th>
+                    <th scope="col">status</th>
+                </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </form>
     </div>
     <script src="/indexUser.js"></script>
+
 </body>
 </html>
